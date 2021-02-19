@@ -33,7 +33,7 @@ public class MovieFacadeTest {
 
     @BeforeClass
     public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory();
+        emf = EMF_Creator.createEntityManagerFactoryForTest();
         facade = MovieFacade.getMovieFacade(emf);
     }
 
@@ -44,9 +44,9 @@ public class MovieFacadeTest {
     @Before
     public void setUp() {
         EntityManager em = emf.createEntityManager();
-        Movie mv1 = new Movie(2020, "AA", new String[] {"A", "B"});
-        Movie mv2 = new Movie(2019, "BB", new String[] {"C", "D"});
-        Movie mv3 = new Movie(2018, "AA and BB", new String[] {"E", "F"});
+        Movie mv1 = new Movie(2020, "AA", new String[]{"A", "B"});
+        Movie mv2 = new Movie(2019, "BB", new String[]{"C", "D"});
+        Movie mv3 = new Movie(2018, "AA and BB", new String[]{"E", "F"});
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Movie.deleteAllRows").executeUpdate();
@@ -85,6 +85,7 @@ public class MovieFacadeTest {
         List<Movie> expResult = new ArrayList<>();
         expResult.add(new Movie(2020, "AA", new String[]{"A", "B"}));
         expResult.add(new Movie(2019, "BB", new String[]{"C", "D"}));
+        expResult.add(new Movie(2018, "AA and BB", new String[]{"E", "F"}));
         List<Movie> result = facade.allMovies();
         assertEquals(expResult, result);
     }
@@ -109,7 +110,7 @@ public class MovieFacadeTest {
         System.out.println("getMoviesByTitle");
         String title = "AA";
         List<Movie> expResult = new ArrayList<>();
-        expResult.add(new Movie(2020, "AA", new String[] {"A", "B"}));
+        expResult.add(new Movie(2020, "AA", new String[]{"A", "B"}));
         expResult.add(new Movie(2018, "AA and BB", new String[]{"E", "F"}));
         List<Movie> result = facade.getMoviesByTitle(title);
         assertEquals(expResult, result);
