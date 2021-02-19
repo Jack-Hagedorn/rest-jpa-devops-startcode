@@ -71,9 +71,8 @@ public class MovieFacadeTest {
     public void testCreate() {
         System.out.println("create");
         Movie mv = new Movie(2012, "AAA", new String[]{"E", "F"});
-        MovieFacade instance = null;
         MovieDTO expResult = new MovieDTO(mv);
-        MovieDTO result = instance.create(mv);
+        MovieDTO result = facade.create(mv);
         assertEquals(expResult, result);
     }
 
@@ -83,11 +82,10 @@ public class MovieFacadeTest {
     @Test
     public void testAllMovies() {
         System.out.println("allMovies");
-        MovieFacade instance = null;
         List<Movie> expResult = new ArrayList<>();
         expResult.add(new Movie(2020, "AA", new String[]{"A", "B"}));
         expResult.add(new Movie(2019, "BB", new String[]{"C", "D"}));
-        List<Movie> result = instance.allMovies();
+        List<Movie> result = facade.allMovies();
         assertEquals(expResult, result);
     }
 
@@ -98,9 +96,8 @@ public class MovieFacadeTest {
     public void testGetMovieById() {
         System.out.println("getMovieById");
         long id = 1;
-        MovieFacade instance = null;
         MovieDTO expResult = new MovieDTO(new Movie(2020, "AA", new String[]{"A", "B"}));
-        MovieDTO result = instance.getMovieById(id);
+        MovieDTO result = facade.getMovieById(id);
         assertEquals(expResult, result);
     }
 
@@ -110,12 +107,11 @@ public class MovieFacadeTest {
     @Test
     public void testGetMoviesByTitle() {
         System.out.println("getMoviesByTitle");
-        String title = "";
-        MovieFacade instance = null;
+        String title = "AA";
         List<Movie> expResult = new ArrayList<>();
         expResult.add(new Movie(2020, "AA", new String[] {"A", "B"}));
         expResult.add(new Movie(2018, "AA and BB", new String[]{"E", "F"}));
-        List<Movie> result = instance.getMoviesByTitle("AA");
+        List<Movie> result = facade.getMoviesByTitle(title);
         assertEquals(expResult, result);
     }
 
